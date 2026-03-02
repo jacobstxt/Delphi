@@ -1,0 +1,224 @@
+object Form1: TForm1
+  Left = 0
+  Top = 0
+  Caption = #1044#1054#1052': '#1056#1086#1079#1082#1083#1072#1076#1072#1085#1085#1103' '#1087#1077#1088#1110#1086#1076#1080#1095#1085#1080#1093' '#1092#1091#1085#1082#1094#1110#1081' '#1091' '#1088#1103#1076' '#1060#1091#1088#39#1108
+  ClientHeight = 627
+  ClientWidth = 1047
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -12
+  Font.Name = 'Segoe UI'
+  Font.Style = []
+  TextHeight = 15
+  object Image1: TImage
+    Left = 0
+    Top = 8
+    Width = 1039
+    Height = 329
+  end
+  object GroupBox1: TGroupBox
+    Left = 0
+    Top = 343
+    Width = 1039
+    Height = 266
+    Caption = #1055#1072#1088#1072#1084#1077#1090#1088#1080' '#1075#1088#1072#1092#1110#1082#1110#1074':'
+    Color = clDeepskyblue
+    Font.Charset = RUSSIAN_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -18
+    Font.Name = 'Calibri'
+    Font.Style = [fsBold]
+    ParentBackground = False
+    ParentColor = False
+    ParentFont = False
+    TabOrder = 0
+    object Label1: TLabel
+      Left = 56
+      Top = 40
+      Width = 241
+      Height = 22
+      Caption = #1042#1074#1077#1076#1110#1090#1100' '#1084#1077#1078#1110' '#1079#1084#1110#1085#1080' '#1072#1088#1075#1091#1084#1077#1085#1090#1091':'
+      Color = clHighlight
+      ParentColor = False
+    end
+    object Label2: TLabel
+      Left = 56
+      Top = 80
+      Width = 22
+      Height = 22
+      Caption = 'al='
+    end
+    object Label3: TLabel
+      Left = 231
+      Top = 80
+      Width = 23
+      Height = 22
+      Caption = 'bl='
+    end
+    object Label4: TLabel
+      Left = 45
+      Top = 136
+      Width = 178
+      Height = 22
+      Caption = #1050#1110#1083#1100#1082#1110#1089#1090#1100' '#1075#1072#1088#1084#1086#1085#1110#1082' Ng='
+    end
+    object Label5: TLabel
+      Left = 45
+      Top = 176
+      Width = 209
+      Height = 22
+      Caption = #1050#1110#1083#1100#1082#1110#1090#1100' '#1090#1086#1095#1086#1082' '#1090#1072#1073#1091#1083#1103#1094#1110#1111' N='
+    end
+    object Label6: TLabel
+      Left = 447
+      Top = 28
+      Width = 180
+      Height = 22
+      Caption = #1054#1073#1077#1088#1110#1090#1100' '#1110#1085#1096#1110' '#1079#1085#1072#1095#1077#1085#1085#1103':'
+    end
+    object Label7: TLabel
+      Left = 447
+      Top = 80
+      Width = 193
+      Height = 22
+      Caption = #1058#1086#1074#1097'. '#1083#1110#1085#1110#1111' '#1075#1088#1072#1092#1110#1082#1072' '#1092'-'#1094#1110#1111'='
+    end
+    object Label8: TLabel
+      Left = 405
+      Top = 128
+      Width = 235
+      Height = 22
+      Caption = #1058#1086#1074#1097'.'#1083#1110#1085#1110#1111' '#1075#1088#1072#1092#1110#1082#1072' '#1089#1091#1084#1080' '#1088#1103#1076#1091'='
+    end
+    object Label9: TLabel
+      Left = 459
+      Top = 172
+      Width = 181
+      Height = 22
+      Caption = #1058#1086#1074#1097'.'#1086#1089#1077#1081' '#1082#1086#1086#1088#1076#1080#1085#1072#1090'='
+    end
+    object Label10: TLabel
+      Left = 489
+      Top = 225
+      Width = 151
+      Height = 22
+      Caption = #1058#1086#1074#1097'. '#1083#1110#1085#1110#1081' '#1075#1088#1072#1090#1082#1080'='
+    end
+    object Edit1: TEdit
+      Left = 277
+      Top = 80
+      Width = 102
+      Height = 30
+      TabOrder = 0
+      Text = '0'
+    end
+    object Edit2: TEdit
+      Left = 92
+      Top = 80
+      Width = 102
+      Height = 30
+      TabOrder = 1
+      Text = '10'
+    end
+    object Edit3: TEdit
+      Left = 260
+      Top = 136
+      Width = 90
+      Height = 30
+      TabOrder = 2
+      Text = '5'
+    end
+    object Edit4: TEdit
+      Left = 260
+      Top = 176
+      Width = 90
+      Height = 30
+      TabOrder = 3
+      Text = '800'
+    end
+    object SpinEdit1: TSpinEdit
+      Left = 666
+      Top = 72
+      Width = 73
+      Height = 33
+      MaxValue = 4
+      MinValue = 1
+      TabOrder = 4
+      Value = 1
+    end
+    object SpinEdit2: TSpinEdit
+      Left = 666
+      Top = 122
+      Width = 73
+      Height = 33
+      MaxValue = 4
+      MinValue = 1
+      TabOrder = 5
+      Value = 1
+    end
+    object SpinEdit3: TSpinEdit
+      Left = 668
+      Top = 169
+      Width = 71
+      Height = 33
+      MaxValue = 4
+      MinValue = 1
+      TabOrder = 6
+      Value = 2
+    end
+    object SpinEdit4: TSpinEdit
+      Left = 666
+      Top = 224
+      Width = 73
+      Height = 33
+      MaxValue = 4
+      MinValue = 1
+      TabOrder = 7
+      Value = 1
+    end
+    object Button1: TButton
+      Left = 850
+      Top = 165
+      Width = 145
+      Height = 36
+      Caption = #1053#1072#1084#1072#1083#1102#1074#1072#1090#1080
+      TabOrder = 8
+      OnClick = Button1Click
+    end
+    object BitBtn1: TBitBtn
+      Left = 850
+      Top = 212
+      Width = 145
+      Height = 37
+      Caption = #1042#1080#1093#1110#1076
+      Kind = bkClose
+      NumGlyphs = 2
+      TabOrder = 9
+    end
+  end
+  object ComboBox1: TComboBox
+    Left = 850
+    Top = 385
+    Width = 145
+    Height = 23
+    TabOrder = 1
+    Text = #1060#1091#1085#1082#1094#1110#1103
+    Items.Strings = (
+      #1055#1088#1103#1084#1086#1082#1091#1090#1085#1080#1081' '#1110#1084#1087#1091#1083#1100#1089'               '
+      'Cos(x)           '
+      'Sin(x) + 0.5 * Cos(2 * x)')
+  end
+  object ComboBox2: TComboBox
+    Left = 850
+    Top = 444
+    Width = 145
+    Height = 23
+    TabOrder = 2
+    Text = #1052#1077#1090#1086#1076
+    Items.Strings = (
+      #1062#1077#1085#1090#1088#1072#1083#1100#1085#1080#1093' '#1087#1088#1103#1084#1086#1082#1091#1090#1085#1080#1082#1110#1074
+      #1058#1088#1072#1087#1077#1094#1110#1111
+      #1057#1110#1084#1087#1089#1086#1085#1072)
+  end
+end

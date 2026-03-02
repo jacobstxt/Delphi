@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>1899.12.30 00:00:00.000.354,D:\Unit1.dfm=C:\Users\Acer\Downloads\1 курс\ООП\Lab_1.dfm</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.141,D:\Project1.dproj=C:\Users\Acer\Downloads\1 курс\ООП\Project_1.dproj</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.799,=D:\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.354,D:\Unit1.pas=C:\Users\Acer\Downloads\1 курс\ООП\Lab_1.pas</Transaction>
+  </Transactions>
+</BorlandProject>

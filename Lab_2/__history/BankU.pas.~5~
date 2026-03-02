@@ -1,0 +1,81 @@
+unit BankU;
+
+interface
+Uses SysUtils;
+
+Type
+BankAccount = class (TObject)
+
+
+Private
+FAccountNumber: string;
+FOwnerName: string;
+FBalance: Double;
+
+
+Public
+Constructor Initialize(ANumber,AOwner:string;AInitialDeposit: Double = 0);
+procedure Deposit(Amount: Double);
+function Withdraw(Amount: Double): Boolean;
+procedure ShowStatement;
+
+property Balance: Double read FBalance;
+property OwnerName: string read FOwnerName write FOwnerName;
+property AccountNumber: string read FAccountNumber;
+end;
+
+
+
+
+implementation
+
+Constructor BankAccount.Initialize(ANumber,AOwner:string;AInitialDeposit: Double = 0);
+Begin
+FAccountNumber := ANumber;
+FOwnerName := AOwner;
+if AinitialDeposit >=0 then
+    FBalance := AInitialDeposit
+else
+    FBalance := 0;
+end;
+
+
+procedure BankAccount.Deposit(Amount: Double);
+begin
+  Writeln('Спроба покласти гроші на депозит');
+  if Amount > 0 then
+  begin
+    FBalance := FBalance + Amount;
+    Writeln('Рахунок ', FAccountNumber, ': поповнено на ', Amount:0:2, ' грн.');
+  end;
+end;
+
+function BankAccount.Withdraw(Amount: Double): Boolean;
+begin
+  Writeln('Спроба зняти кошти з рахунку...');
+  if (Amount > 0) and (Amount <= FBalance) then
+  begin
+    FBalance := FBalance - Amount;
+    Writeln('Рахунок ', FAccountNumber, ': знято ', Amount:0:2, ' грн.');
+    Result := True;
+  end
+  else
+  begin
+    Writeln('Помилка: недостатньо коштів або некоректна сума (', Amount:0:2, ')');
+    Result := False;
+  end;
+end;
+
+procedure BankAccount.ShowStatement;
+begin
+  Writeln('=== ВИПИСКА ПО РАХУНКУ ===');
+  Writeln('Номер: ', FAccountNumber);
+  Writeln('Власник: ', FOwnerName);
+  Writeln('Баланс: ', FBalance:0:2, ' грн.');
+  Writeln('==========================');
+end;
+
+
+
+
+end.

@@ -1,0 +1,49 @@
+program Project1;
+
+{$APPTYPE CONSOLE}
+
+{$R *.res}
+
+uses
+  System.SysUtils,
+  Winapi.Windows,
+  SphereU in 'SphereU.pas',
+  BankU in 'BankU.pas';
+
+Var MySphere: Sphere;
+MyBankAccount: BankAccount;
+nSphere: Sphere;
+newRadius:Real;
+
+
+
+begin
+SetConsoleOutputCP(65001);
+SetConsoleCP(65001);
+
+MySphere := Sphere.Create;
+MySphere.DisplayStatistics;
+Writeln('----------------------------------------------');
+MySphere.Free;
+
+
+MySphere := Sphere.Creat(15.1);
+MySphere.DisplayStatistics;
+Writeln('----------------------------------------------');
+
+newRadius := 5.1;
+MySphere.SetRadius(newRadius);
+Writeln('N_LKola   = ', 2.0 * Pi * MySphere.GetRadius);
+MySphere.DisplayStatistics;
+MySphere.Free;
+Writeln('----------------------------------------------');
+
+MyBankAccount := BankAccount.Initialize('UA893223130000000123456789012','Maksym Baran');
+MyBankAccount.Deposit(1000.0);
+MyBankAccount.Withdraw(800.0);
+MyBankAccount.ShowStatement;
+
+
+
+Readln;
+end.

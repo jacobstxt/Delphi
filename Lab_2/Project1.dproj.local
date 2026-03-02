@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>1899.12.30 00:00:00.000.621,D:\Університет\ООП\Lab_2\Unit1.pas=D:\Університет\ООП\Lab_2\BankU.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.412,=D:\Університет\ООП\Lab_2\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.918,D:\Університет\ООП\Lab_2\Unit1.pas=D:\Університет\ООП\Lab_2\SphereU.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.080,=D:\Університет\ООП\Lab_2\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.537,C:\Університет\Алгоритмізація та програмування\Delphi Projects\Project1.dproj=D:\Університет\ООП\Lab_2\Project1.dproj</Transaction>
+  </Transactions>
+</BorlandProject>

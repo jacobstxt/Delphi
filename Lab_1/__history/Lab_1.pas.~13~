@@ -1,0 +1,503 @@
+﻿unit Lab_1;
+
+interface
+
+uses
+ Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.Buttons, Vcl.StdCtrls,
+  Vcl.Samples.Spin,Math;
+
+type
+  Vector = array [0..1000] of Real;      // для масивів із координатами графіків
+  Vec = array [0..50] of Real;           // для масивів із коефіцієнтами ряду Фур'є
+
+  TForm1 = class(TForm)
+    GroupBox1: TGroupBox;
+    Image1: TImage;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label5: TLabel;
+    Label6: TLabel;
+    Label7: TLabel;
+    Label8: TLabel;
+    Label9: TLabel;
+    Label10: TLabel;
+    Edit1: TEdit;
+    Edit2: TEdit;
+    Edit3: TEdit;
+    Edit4: TEdit;
+    SpinEdit1: TSpinEdit;
+    SpinEdit2: TSpinEdit;
+    SpinEdit3: TSpinEdit;
+    SpinEdit4: TSpinEdit;
+    Button1: TButton;
+    BitBtn1: TBitBtn;
+    ComboBox1: TComboBox;                // вибір функції
+    ComboBox2: TComboBox;                // вибір методу інтегрування
+    procedure Button1Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+  Xe, Ye: Vector;        // координати табульованої періодичної функції
+  Xg, Yg: Vector;        // координати табульованої суми ряду Фур'є
+  a, b, c: Vec;          // коефіцієнти ряду Фур'є
+  Ne, Ngr: Integer;      // Ne = Ngr кількість точок обох графіків
+  Ng: Integer;           // кількість гармонік
+  Tp: Real;              // період функції
+  al, bl: Real;          // область визначення функції Tp = bl - al
+
+implementation
+
+{$R *.dfm}
+
+
+
+function f(x: Real): Real;
+var
+  normalizedX: Real;
+begin
+  // Приведення x до діапазону [0, 2*Pi] для коректної циклічності
+  normalizedX := x - Floor(x / (2 * Pi)) * (2 * Pi);
+
+  if Form1.ComboBox1.ItemIndex = 0 then
+  begin
+    // Меандр (Прямокутний імпульс)
+    if normalizedX < Pi then
+      Result := 1
+    else
+      Result := -1;
+  end
+  else if Form1.ComboBox1.ItemIndex = 1 then
+    Result := Cos(x)
+  else if Form1.ComboBox1.ItemIndex = 2 then
+    Result := Sin(x) + 0.5 * Cos(2 * x)
+  else
+    Result := 0;
+end;
+
+// ------------------------------------------------------------
+// Табуляція функції
+// ------------------------------------------------------------
+procedure TabF(var Xe: Vector; var Ye: Vector);
+var
+  h: Real;
+  i: Integer;
+begin
+  h := (bl - al) / Ne;
+  Xe[0] := al;
+  for i := 0 to Ne - 1 do
+  begin
+    Ye[i] := f(Xe[i]);
+    Xe[i+1] := Xe[i] + h;
+  end;
+end;
+
+// ------------------------------------------------------------
+// Обчислення визначеного інтеграла різними методами
+// ------------------------------------------------------------
+function Integral(k: Integer; IsCos: Boolean): Real; //кількість гармонік
+var
+  i: Integer;
+  sum, h, x, w: Real;
+   n: Integer;
+begin
+  w := 2 * Pi / Tp;
+  h := (bl - al) / Ne;
+  sum := 0;
+
+  // Метод центральних прямокутників
+  if Form1.ComboBox2.ItemIndex = 0 then
+  begin
+    for i := 0 to Ne - 1 do
+    begin
+      x := al + (i + 0.5) * h;
+      if IsCos then
+        sum := sum + f(x) * Cos(k * w * x)
+      else
+        sum := sum + f(x) * Sin(k * w * x);
+    end;
+    Result := 2 * sum * h / Tp;
+  end
+
+  // Метод трапецій
+  else if Form1.ComboBox2.ItemIndex = 1 then
+  begin
+    sum := (f(al) * Cos(k * w * al) + f(bl) * Cos(k * w * bl)) / 2;
+    for i := 1 to Ne - 1 do
+    begin
+      x := al + i * h;
+      if IsCos then
+        sum := sum + f(x) * Cos(k * w * x)
+      else
+        sum := sum + f(x) * Sin(k * w * x);
+    end;
+    Result := 2 * sum * h / Tp;
+  end
+
+// Метод Сімпсона
+ else if Form1.ComboBox2.ItemIndex = 2 then
+  begin
+    sum := 0;
+    sum := f(al) * Cos(k * w * al) + f(bl) * Cos(k * w * bl);
+    for i := 1 to Ne - 1 do
+    begin
+      x := al + i * h;
+      if i mod 2 = 0 then
+      begin
+        if IsCos then
+          sum := sum + 2 * f(x) * Cos(k * w * x)
+        else
+          sum := sum + 2 * f(x) * Sin(k * w * x);
+      end
+      else
+      begin
+        if IsCos then
+          sum := sum + 4 * f(x) * Cos(k * w * x)
+        else
+          sum := sum + 4 * f(x) * Sin(k * w * x);
+      end;
+    end;
+    Result := 2 * sum * h / (3 * Tp);
+  end
+
+  else
+    Result := 0;
+end;
+
+// ------------------------------------------------------------
+// Процедура побудови і табуляції суми ряду Фур'є
+// ------------------------------------------------------------
+procedure Furje(Xe, Ye: Vector; Ne: Integer; var Yg: Vector);
+var
+  i, k: Integer;
+  w, S, D, KOM: Real;
+begin
+  Ng := StrToInt(Form1.Edit3.Text);
+  Tp := bl - al;
+  w := 2 * Pi / Tp;
+
+  // Обчислення a0
+  a[0] := 0;
+  for i := 1 to Ne - 1 do
+    a[0] := a[0] + Ye[i];
+  a[0] := 2 * a[0] / Ne;
+
+  // Обчислення коефіцієнтів a[k], b[k] для k = 1..Ng
+  for k := 1 to Ng do
+  begin
+    a[k] := Integral(k, True);
+    b[k] := Integral(k, False);
+    //амплітуда гармонік
+    c[k] := Sqrt(Sqr(a[k]) + Sqr(b[k]));
+  end;
+
+  // Побудова і табуляція суми ряду
+  for i := 0 to Ne - 1 do
+  begin
+    S := 0;
+    D := Xe[i] * w;
+    for k := 1 to Ng do
+    begin
+      KOM := k * D;
+      S := S + a[k] * Cos(KOM) + b[k] * Sin(KOM);
+    end;
+    Yg[i] := a[0]/2 + S;
+  end;
+end;
+
+// ------------------------------------------------------------
+// Процедура візуалізації гармонік (амплітудний спектр)
+// ------------------------------------------------------------
+procedure Garm(Ng: Integer; c: Vec);
+var
+  i, Krokx, x: Integer;
+  MaxC, Ky, W, freq: Real;
+  L: Integer;
+begin
+  L := 40;
+  W := 2 * Pi / (bl - al);  // основна частота
+
+  // Визначаємо максимальну амплітуду
+  MaxC := c[1];
+  for i := 2 to Ng do
+    if c[i] > MaxC then MaxC := c[i];
+
+  if MaxC = 0 then MaxC := 1;
+  Ky := (Form1.Image1.ClientHeight - 100) / MaxC;
+
+  with Form1.Image1.Canvas do
+  begin
+    // Очищення
+    Brush.Color := clWhite;
+    FillRect(Rect(0, 0, Form1.Image1.ClientWidth, Form1.Image1.ClientHeight));
+
+    // Малюємо осі для спектру
+    Pen.Color := clBlack;
+    Pen.Width := 1;
+
+    // Вісь X (частота)
+    MoveTo(L, Form1.Image1.ClientHeight - 50);
+    LineTo(Form1.Image1.ClientWidth - 20, Form1.Image1.ClientHeight - 50);
+
+    // Вісь Y (амплітуда)
+    MoveTo(L, Form1.Image1.ClientHeight - 50);
+    LineTo(L, 20);
+
+    // Стрілочки на осях
+    MoveTo(Form1.Image1.ClientWidth - 30, Form1.Image1.ClientHeight - 60);
+    LineTo(Form1.Image1.ClientWidth - 20, Form1.Image1.ClientHeight - 50);
+    LineTo(Form1.Image1.ClientWidth - 40, Form1.Image1.ClientHeight - 40);
+
+    MoveTo(L - 5, 25);
+    LineTo(L, 20);
+    LineTo(L + 5, 25);
+
+    // Підписи осей
+    Font.Size := 10;
+    TextOut(L - 15, 5, 'C');
+    TextOut(Form1.Image1.ClientWidth - 40, Form1.Image1.ClientHeight - 70, 'f, Гц');
+
+    // Розраховуємо крок для відображення частот
+    Krokx := (Form1.Image1.ClientWidth - 2 * L - 50) div Ng;
+    if Krokx < 30 then Krokx := 30;
+
+    // Малюємо спектр
+    Pen.Color := clBlue;
+    Pen.Width := 2;
+
+
+    x := L + 30;  // початкова позиція
+
+    for i := 1 to Ng do
+    begin
+      freq := i * W;  // частота = номер гармоніки * основна частота
+
+      // Малюємо лінію спектру
+      MoveTo(x, Form1.Image1.ClientHeight - 50);
+      LineTo(x, Form1.Image1.ClientHeight - 50 - Round(ky * c[i]));
+
+      // Малюємо кружечки на кінцях
+      Ellipse(x - 3, Form1.Image1.ClientHeight - 53,
+              x + 3, Form1.Image1.ClientHeight - 47);
+      Ellipse(x - 3, Form1.Image1.ClientHeight - 50 - Round(ky * c[i]) - 3,
+              x + 3, Form1.Image1.ClientHeight - 50 - Round(ky * c[i]) + 3);
+
+      // Виводимо значення амплітуди
+      TextOut(x - 3, Form1.Image1.ClientHeight - Round(ky * c[i]) - 77,
+              FloatToStrF(c[i], ffFixed, 5, 2));
+
+      // Виводимо значення частоти під віссю
+      TextOut(x - 15, Form1.Image1.ClientHeight - 30,
+              FloatToStrF(freq, ffFixed, 5, 1));
+
+      x := x + Krokx;
+    end;
+
+    // Виводимо пояснення
+    Font.Size := 8;
+    TextOut(L + 50, Form1.Image1.ClientHeight - 30,
+            'Основна частота w = ' + FloatToStrF(W, ffFixed, 5, 2));
+  end;
+end;
+
+
+
+
+procedure TForm1.Button1Click(Sender: TObject);
+var
+  zx, zy, krx, kry, xx, yy, Gx, Gy: Real;
+  i, krokx, kroky, L: Integer;
+  minYg, maxYg, minx, maxx, miny, maxy, kx, ky: Real;
+begin
+  // Зчитування вхідних даних
+  Ne := StrToInt(Edit4.Text);
+  Ngr := Ne;
+  al := StrToFloat(Edit1.Text);
+  bl := StrToFloat(Edit2.Text);
+
+  // Перевірка коректності даних
+  if Ne > 1000 then Ne := 1000;
+  if Ng > 50 then Ng := 50;
+
+  TabF(Xe, Ye);                 // табуляція заданої періодичної функції
+  Furje(Xe, Ye, Ne, Yg);        // обчислення коефіцієнтів і табуляція суми ряду
+
+  // Будуємо графіки обох функцій Ye(Xe) та Yg(Xe)
+  L := 40; // відступ від країв компоненти TImage
+
+  with Image1 do
+  begin
+    Canvas.Pen.Width := 2;
+    Canvas.Pen.Color := clBlue;
+    Canvas.Pen.Style := psSolid;
+    Canvas.Rectangle(0, 0, Width, Height);
+    Canvas.Brush.Color := clWhite;
+    Canvas.FillRect(Rect(1, 1, Width - 1, Height - 1));
+
+    // Пошук екстремумів для масштабування
+    minYg := Yg[0];
+    maxYg := Yg[0];
+    for i := 1 to Ngr - 1 do
+    begin
+      if maxYg < Yg[i] then maxYg := Yg[i];
+      if minYg > Yg[i] then minYg := Yg[i];
+    end;
+
+    minx := Xe[0];
+    maxx := Xe[Ne - 1];
+    miny := Ye[0];
+    maxy := Ye[0];
+    for i := 1 to Ne - 1 do
+    begin
+      if maxy < Ye[i] then maxy := Ye[i];
+      if miny > Ye[i] then miny := Ye[i];
+    end;
+
+    if maxy < maxYg then maxy := maxYg;
+    if miny > minYg then miny := minYg;
+
+    // Додаємо невеликий запас по краях
+    miny := miny - (maxy - miny) * 0.1;
+    maxy := maxy + (maxy - miny) * 0.1;
+
+    // Обчислюємо коефіцієнти масштабування
+    kx := (Width - 2 * L) / (maxx - minx);
+    ky := (Height - 2 * L) / (miny - maxy);
+    zx := L - kx * minx;
+    zy := Height - L - ky * miny;
+  end;
+
+  // Обчислюємо розташування плаваючих осей
+  if minx <= 0 then
+    Gx := 0
+  else
+    Gx := minx;
+
+  if miny <= 0 then
+    Gy := 0
+  else
+    Gy := miny;
+
+  with Image1.Canvas do
+  begin
+    // Малювання сітки
+    Pen.Color := clBlack;
+    Pen.Width := SpinEdit4.Value;
+    Pen.Style := psDot;
+
+    krokX := (Image1.ClientWidth - 2 * L) div 10;
+    krokY := (Image1.ClientHeight - 2 * L) div 10;
+
+    for i := 0 to 10 do
+    begin
+      // Горизонтальні лінії
+      MoveTo(L, L + i * krokY);
+      LineTo(Image1.ClientWidth - L, L + i * krokY);
+
+      // Вертикальні лінії
+      MoveTo(L + i * krokX, L);
+      LineTo(L + i * krokX, Image1.ClientHeight - L);
+    end;
+
+    // Підписи осей
+    Pen.Style := psSolid;
+    Font.Size := 8;
+
+    xx := minx;
+    yy := maxy;
+    krX := (maxx - minx) / 10.0;
+    krY := (maxy - miny) / 10.0;
+
+    for i := 0 to 9 do
+    begin
+      TextOut(L + i * krokX - 10, Round(ky * 0 + zy) + 5,
+           FloatToStrF(xx, ffFixed, 8, 0));  // 0 знаків після коми
+
+      TextOut(Round(kx * 0 + zx) - 40, L + i * krokY - 5,
+           FloatToStrF(yy, ffFixed, 8, 2));  // 0 знаків після коми
+      xx := xx + krX;
+      yy := yy - krY;
+    end;
+
+    // Малюємо осі координат
+    Pen.Width := SpinEdit3.Value;
+    Pen.Color := clGray; // Змінено з clGreen на спокійний сірий
+
+    // Вісь X
+    MoveTo(L, Round(ky * 0 + zy));
+    LineTo(Image1.ClientWidth - L, Round(ky * 0 + zy));
+
+    // Вісь Y
+    MoveTo(Round(kx * 0 + zx), L);
+    LineTo(Round(kx * 0 + zx), Image1.ClientHeight - L);
+
+    // Стрілочки та підписи (додамо темний колір для тексту)
+    Font.Color := clBlack;
+    TextOut(Image1.ClientWidth - L - 20, Round(ky * 0 + zy) - 20, 'X');
+    TextOut(Round(kx * 0 + zx) + 10, L + 5, 'Y');
+
+    // Графік функції (Оригінал)
+    Pen.Width := SpinEdit1.Value;
+    // Використаємо RGB для точного кольору (приємний помаранчевий)
+    Pen.Color := RGB(255, 128, 0);
+    MoveTo(Round(kx * Xe[0] + zx), Round(ky * Ye[0] + zy));
+    for i := 1 to Ne - 1 do
+      LineTo(Round(kx * Xe[i] + zx), Round(ky * Ye[i] + zy));
+
+    // Графік суми ряду (Фур'є)
+    Pen.Width := SpinEdit2.Value;
+    // Глибокий синій або колір індиго
+    Pen.Color := RGB(0, 102, 204);
+    MoveTo(Round(kx * Xe[0] + zx), Round(ky * Yg[0] + zy));
+    for i := 1 to Ne - 1 do
+      LineTo(Round(kx * Xe[i] + zx), Round(ky * Yg[i] + zy));
+
+  end;
+
+
+
+  if MessageDlg('Показати амплітудний спектр?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
+  begin
+    Image1.Picture := nil;
+    Garm(Ng, c);
+  end;
+end;
+
+
+
+procedure TForm1.FormCreate(Sender: TObject);
+begin
+  ComboBox1.Items.Clear;
+  ComboBox1.Items.Add('Sin(x)');
+  ComboBox1.Items.Add('Cos(x)');
+  ComboBox1.Items.Add('Sin(x) + 0.5 * Cos(2x)');
+  ComboBox1.ItemIndex := 0;
+
+
+  ComboBox2.Items.Clear;
+  ComboBox2.Items.Add('Метод центральних прямокутників');
+  ComboBox2.Items.Add('Метод трапецій');
+  ComboBox2.Items.Add('Метод Сімпсона');
+  ComboBox2.ItemIndex := 0;
+
+
+  Edit1.Text := '0';
+  Edit2.Text := '10';
+  Edit3.Text := '5';
+  Edit4.Text := '800';
+
+  SpinEdit1.Value := 1;
+  SpinEdit2.Value := 1;
+  SpinEdit3.Value := 2;
+  SpinEdit4.Value := 1;
+end;
+
+end.

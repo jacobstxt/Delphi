@@ -1,0 +1,83 @@
+unit SphereU;
+
+interface
+
+Uses SysUtils;
+Const Pi = 3.14159;
+Type
+Sphere = class (TObject)
+
+Private
+R: Real;
+Public
+
+Constructor Create; // явно оголошений стандартний конструктор Create
+Constructor Creat(x: Real); // власний конструктор із параметром x
+Procedure SetRadius(newRadius: Real);
+Function GetRadius : Real;
+Function GetDiameter : Real;
+Function GetLKola : Real;
+Function GetArea : Real;
+Function GetVolume : Real;
+Procedure DisplayStatistics;
+
+end;
+
+implementation
+
+Constructor Sphere.Create; // реалізація стандартного конструктора Create
+Begin
+R := 1.0;
+end;
+
+Constructor Sphere.Creat (x: Real); // реалізація власного конструктора Creat
+Begin
+R := x;
+end;
+
+procedure Sphere.SetRadius(newRadius: Real);
+Begin
+if R>0 then R:= newRadius
+else R:= 1.0
+End;
+
+Function Sphere.GetRadius: Real;
+Begin
+  GetRadius := R;
+End;
+
+Function Sphere.GetDiameter: Real;
+Begin
+  GetDiameter := 2.0 * R;
+End;
+
+Function Sphere.GetLKola: Real;
+Begin
+  GetLKola := Pi * GetDiameter;
+End;
+
+Function Sphere.GetArea: Real;
+Var radiusSquare: Real;
+Begin
+ radiusSquare := R * R;
+  GetArea := 4.0 * Pi * radiusSquare;
+End;
+
+Function Sphere.GetVolume: Real;
+Var radiusCubed: Real;
+Begin
+  radiusCubed := R * R * R;
+  GetVolume := (4.0 * Pi * radiusCubed) / 3.0;
+End;
+
+Procedure Sphere.DisplayStatistics;
+Begin
+  Writeln ('Radius     = ', GetRadius);
+  Writeln ('Diameter   = ', GetDiameter);
+  Writeln ('LKola      = ', GetLKola:10:5);
+  Writeln ('Area       = ', GetArea:10:5);
+  Writeln ('Volume     = ', GetVolume:10:5);
+End;
+
+
+end.
