@@ -1,0 +1,76 @@
+unit BallU;
+
+interface
+uses SysUtils, SphereU;
+Type
+// Власний перелічувальний тип Colored
+Colored = (RED, GREEN, BLUE, YELLOW, WHITE, BLACK);
+
+Ball = class (Sphere)
+Private
+theName: String; // поле класу Ball
+c: Colored; // поле класу Ball
+
+Public
+Constructor Creat(initR: Real; const initName: String; initColor: Colored);
+Procedure SetName(newName: String);
+Procedure SetColor(newColor: Colored);
+Function GetName: String;
+Function GetColor: Colored;
+Function GetColorName: String;
+Procedure ResetBall (newRadius: Real; newName: String; newColor: Colored);
+End;
+implementation
+
+Constructor Ball.Creat (initR: Real; const initName: String; initColor: Colored);
+Begin
+// R := initR; так змінювати Private-поле предку не можна.
+// Для нащадку це поле R є невидиме!
+
+Inherited SetRadius (initR); // виклик методу предку
+theName := initName;
+c := initColor;
+End;
+
+Procedure Ball.SetName (NewName: String);
+Begin
+theName := NewName;
+End;
+
+Procedure Ball.SetColor (NewColor: Colored);
+Begin
+c:= NewColor;
+End;
+
+Function Ball.GetName: String;
+Begin
+Result := theName;
+End;
+
+Function Ball.GetColor: Colored;
+Begin
+Result := c;
+End;
+
+Function Ball.GetColorName: String;
+Var ColorName: String;
+Begin
+case c of
+RED : ColorName := 'RED';
+GREEN : ColorName := 'GREEN';
+BLUE : ColorName := 'BLUE';
+YELLOW: ColorName := 'YELLOW';
+WHITE : ColorName := 'WHITE';
+BLACK : ColorName := 'BLACK';
+End;
+Result := ColorName;
+End;
+
+Procedure Ball.resetBall (newRadius: Real; newName: String; newColor: Colored);
+Begin
+SetRadius(NewRadius);
+SetName (newName);
+SetColor (newColor);
+End;
+
+end.

@@ -1,0 +1,34 @@
+unit SavingAccountU;
+
+
+interface
+uses SysUtils, BankU;
+
+Type
+SavingAccount = class (BankAccount)
+
+private
+    FInterestRate: Double; // Відсоткова ставка (наприклад, 0.05 для 5%)
+public
+constructor Initialize(ANumber, AOwner: string; AInitialDeposit: Double; ARate: Double);
+procedure ApplyInterest;
+end;
+
+implementation
+
+Constructor SavingAccount.Initialize (ANumber, AOwner: string; AInitialDeposit: Double; ARate: Double);
+Begin
+
+
+
+Procedure SavingAccount.ApplyInterest
+Begin
+  Deposit(Balance * FInterestRate);
+  Writeln('Нараховано відсотки!');
+End;
+
+End;
+
+
+
+end.
