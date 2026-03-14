@@ -1,0 +1,69 @@
+unit Unit1;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs;
+
+type
+  TForm1 = class(TForm)
+  procedure FormPaint(Sender: TObject);
+end;
+  TRectang = class
+  private
+    coord: Array [0..3] of Integer;
+  public
+    Constructor Create(left, top, right, bottom : Integer); Overload;
+  published
+    Constructor Create(topLeft, bottomRight: TPoint); Overload;
+
+  end;
+var
+  Form1: TForm1;
+
+implementation
+
+{$R *.dfm}
+Constructor TRectang.Create(left, top, right, bottom: Integer);
+Begin
+// «береженн€ переданих значень
+coord[0] := left;
+coord[1] := top;
+coord[2] := right;
+coord[3] := bottom;
+end;
+
+Constructor TRectang.Create(topLeft, bottomRight: TPoint);
+Begin
+// «береженн€ переданих значень
+coord[0] := topLeft.X;
+coord[1] := topLeft.Y;
+coord[2] := bottomRight.X;
+coord[3] := bottomRight.Y;
+end;
+
+
+
+procedure TForm1.FormPaint(Sender: TObject);
+Var rect1, rect2 : TRectang;
+point1, point2: TPoint;
+Begin
+point1 := Point(65,75);
+point2 := Point(95,100);
+rect1 := TRectang.Create(22, 43, 54, 75);
+rect2 := TRectang.Create(point1, point2);
+With Form1.Canvas do
+Begin
+Pen.Width := 3;
+Pen.Color := clRed;
+Rectangle(rect1.coord[0], rect1.coord[1],rect1.coord[2], rect1.coord[3]); // червоний пр€мокутник
+Pen.Width := 4;
+Pen.Color:=clGreen;
+Rectangle(rect2.coord[0], rect2.coord[1],rect2.coord[2], rect2.coord[3]); // зелений пр€мокутник
+End;
+
+end;
+
+
+end.

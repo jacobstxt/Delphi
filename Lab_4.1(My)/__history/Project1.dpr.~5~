@@ -1,0 +1,24 @@
+program Project1;
+
+{$APPTYPE CONSOLE}
+
+{$R *.res}
+
+uses
+  System.SysUtils,
+  AreaU in 'AreaU.pas';
+
+
+var
+  shape: FigureArea;
+
+
+begin
+  shape := shape.Create;
+  Writeln('Square area: ', shape.Area(5):0:2);
+  Writeln('Rectangle area: ', shape.Area(4,6):0:2);
+  Writeln('Circle area: ', shape.Area(3.5):0:2);
+
+  shape.Free;
+  Readln;
+end.

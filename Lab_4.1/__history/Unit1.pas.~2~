@@ -1,0 +1,69 @@
+
+    procedure FormPaint(Sender: TObject);unit Unit1;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs;
+
+type
+  TForm1 = class(TForm);
+  TRectang = class
+  private
+    coord: Array [0..3] of Integer;
+  public
+    Constructor Create(left, top, right, bottom : Integer); Overload;
+  published
+    Constructor Create(topLeft, bottomRight: TPoint); Overload;
+
+  end;
+var
+  Form1: TForm1;
+
+implementation
+
+{$R *.dfm}
+Constructor TRectang.Create(left, top, right, bottom: Integer);
+Begin
+// «береженн€ переданих значень
+coord[0] := left;
+coord[1] := top;
+coord[2] := right;
+coord[3] := bottom;
+end;
+
+Constructor TRectang.Create(topLeft, bottomRight: TPoint);
+Begin
+// «береженн€ переданих значень
+coord[0] := topLeft.X;
+coord[1] := topLeft.Y;
+coord[2] := bottomRight.X;
+coord[3] := bottomRight.Y;
+end;
+
+
+
+procedure TForm1.FormPaint(Sender: TObject);
+begin
+Var rect1, rect2 : TRectang; // оголошуЇмо 2 обТЇкти нашого класу TRectang
+point1, point2: TPoint; // оголошуЇмо 2 обТЇкти стандартного класу TPoint
+Begin
+point1 := Point(65,75); // створюЇмо обТЇкт стандартного класу TPoint
+point2 := Point(95,100); // створюЇмо обТЇкт стандартного класу TPoint
+rect1 := TRectang.Create(22, 43, 54, 75); // створюЇмо обТЇкт нашого класу TRectang
+rect2 := TRectang.Create(point1, point2); // створюЇмо обТЇкт нашого класу TRectang
+With Form1.Canvas do
+Begin
+Pen.Width := 3; // встановлюЇмо ширину пера дл€ малюванн€
+Pen.Color := clRed; // встановлюЇмо кол≥р пера Ц червоний
+Rectangle(rect1.coord[0], rect1.coord[1],
+rect1.coord[2], rect1.coord[3]); // малюЇмо червоний пр€мокутник
+Pen.Width := 4; // встановлюЇмо ширину пера дл€ малюванн€
+Pen.Color:=clGreen; // встановлюЇмо кол≥р пера Ц зелений
+Rectangle(rect2.coord[0], rect2.coord[1],
+rect2.coord[2], rect2.coord[3]); // малюЇмо зелений пр€мокутник
+End;
+
+
+end.
