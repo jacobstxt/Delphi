@@ -1,0 +1,97 @@
+unit Unit1;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls;
+
+type
+  TShape = class
+  function GetArea: Double; Virtual; Abstract;
+  end;
+
+  TRectangleArea = class(TShape)
+   A,B: double;
+   function GetArea: Double; Override;
+  end;
+
+  TCircleArea = class(TShape)
+   R: double;
+   function GetArea: Double; Override;
+  end;
+
+  TSquareArea = class(TShape)
+   A: double;
+   function GetArea: Double; Override;
+  end;
+
+
+  TForm1 = class(TForm)
+    Label1: TLabel;
+    Button1: TButton;
+    Button2: TButton;
+    Button3: TButton;
+    procedure Button1Click(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+    procedure Button3Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+
+{$R *.dfm}
+
+
+function TRectangleArea.GetArea : Double;
+Begin
+GetArea := A*B;
+end;
+function TCircleArea.GetArea : Double;
+Begin
+GetArea := 3.14 * R*R;
+end;
+
+function TSquareArea.GetArea : Double;
+Begin
+GetArea := A*A;
+end;
+
+procedure TForm1.Button1Click(Sender: TObject);
+Var rec: TRectangleArea;
+A,B : Double;
+S : String;
+begin
+ rec := TRectangleArea.Create;
+ rec.A := 5;
+ rec.B := 3;
+
+ Form1.Label1.Caption := FloatToStr(rec.GetArea);
+end;
+
+procedure TForm1.Button2Click(Sender: TObject);
+Var cir: TCircleArea;
+R:Double;
+begin
+cir := TCircleArea.Create;
+cir.R := 6;
+Form1.Label1.Caption := FloatToStr(cir.GetArea);
+
+end;
+
+procedure TForm1.Button3Click(Sender: TObject);
+Var squ: TSquareArea;
+A:Double;
+begin
+squ := TSquareArea.Create;
+squ.A := 6;
+Form1.Label1.Caption := FloatToStr(squ.GetArea);
+end;
+
+end.

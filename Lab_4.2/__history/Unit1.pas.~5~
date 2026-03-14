@@ -1,0 +1,59 @@
+unit Unit1;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls;
+
+type
+    TField = class // TField - клас-предок
+    function GetData: String; Virtual; Abstract;
+    end;
+    TStringField = class(TField) // TStringField - клас-нащадок 1
+    Data: String; // поле класу
+    Function GetData: String; Override;
+    end;
+    TIntegerField = class(TField) // TIntegerField - клас-нащадок 2
+    Data: Integer; // поле класу
+    Function GetData: String; Override;
+    end;
+    TExtendedField = class(TField) // TExtendedField - клас-нащадок 3
+    Data: Extended; // поле класу
+    Function GetData: String; Override;
+    end;
+
+
+
+  TForm1 = class(TForm)
+    Label1: TLabel;
+    Button1: TButton;
+    Button2: TButton;
+    Button3: TButton;
+    Button4: TButton;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+{$R *.dfm}
+
+function TStringField.GetData;
+Begin
+GetData := Data;
+end;
+function TIntegerField.GetData;
+Begin
+GetData := IntToStr(Data);
+end;
+function TExtendedField.GetData;
+Begin
+GetData := FloatToStrF(Data, ffFixed, 7, 2);
+end;
+
+end.
