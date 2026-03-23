@@ -13,7 +13,7 @@ type
 
   TRectangleArea = class(TShape)
    A,B: double;
-   function GetArea: Double; Override;
+   //function GetArea: Double; Override;
   end;
 
   TCircleArea = class(TShape)
@@ -49,10 +49,10 @@ implementation
 {$R *.dfm}
 
 
-function TRectangleArea.GetArea : Double;
-Begin
-GetArea := A*B;
-end;
+//function TRectangleArea.GetArea : Double;
+//Begin
+//GetArea := A*B;
+//end;
 function TCircleArea.GetArea : Double;
 Begin
 GetArea := 3.14 * R*R;

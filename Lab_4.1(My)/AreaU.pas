@@ -6,16 +6,13 @@ Uses SysUtils;
 Type
 FigureArea = class (TObject)
 
-Private
-FBalance: Double;
+
 
 
 Public
 function Area(a: Integer): Double; overload;        // квадрат
 function Area(a, b: Integer): Double; overload;     // прямокутник
 function Area(r: Double): Double; overload;         // коло
-
-
 end;
 
 implementation

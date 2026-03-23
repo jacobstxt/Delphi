@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <BorlandProject>
-  <Transactions>
-    <Transaction>2026.03.14 18:44:01.951,D:\Університет\ООП\Lab_4.1(My)\Project1.dproj=C:\Університет\Алгоритмізація та програмування\Delphi Projects\Project1.dproj</Transaction>
-    <Transaction>2026.03.14 18:46:22.926,=D:\Університет\ООП\Lab_4.1(My)\Unit1.pas</Transaction>
-    <Transaction>2026.03.14 18:47:02.465,D:\Університет\ООП\Lab_4.1(My)\AreaU.pas=D:\Університет\ООП\Lab_4.1(My)\Unit1.pas</Transaction>
+	<Transactions>
+    <Transaction>1899.12.30 00:00:00.000.465,D:\Університет\ООП\Lab_4.1(My)\Unit1.pas=D:\Університет\ООП\Lab_4.1(My)\AreaU.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.926,=D:\Університет\ООП\Lab_4.1(My)\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.951,C:\Університет\Алгоритмізація та програмування\Delphi Projects\Project1.dproj=D:\Університет\ООП\Lab_4.1(My)\Project1.dproj</Transaction>
   </Transactions>
 </BorlandProject>

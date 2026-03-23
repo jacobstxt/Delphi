@@ -1,0 +1,67 @@
+program Project1;
+
+{$APPTYPE CONSOLE}
+
+{$R *.res}
+
+uses
+  System.SysUtils,
+  Windows,
+  BankU in 'BankU.pas',
+  SavingAccountU in 'SavingAccountU.pas',
+  BankCollectionU in 'BankCollectionU.pas';
+
+  var
+  B: Bank;
+  A1, A2: BankAccount;
+  S1: SavingAccount;
+
+
+begin
+
+  SetConsoleCP(1251);
+  SetConsoleOutputCP(1251);
+
+  A1 := BankAccount.Initialize('UA001', 'Іваненко Іван', 5000);
+  A2 := BankAccount.Initialize('UA002', 'Петренко Петро', 3000);
+  S1 := SavingAccount.Initialize('UA003', 'Коваленко Олена', 10000, 15.0);
+
+
+  // Створюємо банк
+  B := Bank.Create('ПриватБанк');
+
+  // Додаємо рахунки до банку (агрегування — банк лише посилається на них)
+  B.AddAccount(A1);
+  B.AddAccount(A2);
+  B.AddAccount(S1);
+
+  B.ShowAllAccounts;
+
+  // Операції з рахунками
+  A1.Deposit(1000);
+  A2.Withdraw(500);
+  S1.ApplyInterest;
+
+  // Показуємо всі рахунки
+  B.ShowAllAccounts;
+  B.ShowTotalBalance;
+
+  WriteLn('');
+  WriteLn('--- Видаляємо рахунок UA002 з банку ---');
+  B.RemoveAccount('UA002');
+
+
+  WriteLn('Рахунок A2 ще існує: ', A2.OwnerName, ', баланс: ', A2.Balance:0:2);
+
+  B.ShowTotalBalance;
+
+
+
+  A1.Free;
+  A2.Free;
+  S1.Free;
+  B.Free;
+
+  ReadLn;
+
+end.

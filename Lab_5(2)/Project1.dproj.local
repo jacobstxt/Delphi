@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>1899.12.30 00:00:00.000.947,D:\Університет\ООП\Lab_5(2)\Unit1.pas=D:\Університет\ООП\Lab_5(2)\BankCollectionU.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.712,=D:\Університет\ООП\Lab_5(2)\Unit2.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.123,=D:\Університет\ООП\Lab_5(2)\BankU.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.555,=D:\Університет\ООП\Lab_5(2)\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.150,C:\Університет\Алгоритмізація та програмування\Delphi Projects\Project1.dproj=D:\Університет\ООП\Lab_5(2)\Project1.dproj</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.883,=D:\Університет\ООП\Lab_5(2)\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.803,D:\Університет\ООП\Lab_5(2)\Unit1.pas=D:\Університет\ООП\Lab_5(2)\SavingAccountU.pas</Transaction>
+  </Transactions>
+	<ProjectSortOrder AutoSort="0" SortType="0">
+    <File Path="BankU.pas"/>
+    <File Path="BankCollectionU.pas"/>
+    <File Path="SavingAccountU.pas"/>
+  </ProjectSortOrder>
+</BorlandProject>

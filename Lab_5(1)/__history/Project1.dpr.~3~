@@ -1,0 +1,32 @@
+program Project1;
+
+{$APPTYPE CONSOLE}
+
+{$R *.res}
+
+uses
+  System.SysUtils,
+  PointsU in 'PointsU.pas',
+  SichuU in 'SichuU.pas',
+  SphereU in 'SphereU.pas';
+
+  var
+  s: Sphere;
+
+begin
+
+ s := Sphere.Create(1.0, 2.0, 3.0, 5.0);
+
+  WriteLn('Точка/центр: ', s.GetPoint);
+  WriteLn('Радіус:      ', FloatToStr(s.GetRad));
+  WriteLn('Об''єм:      ', FloatToStr(s.Volume));
+
+  WriteLn('--- Змінюємо сферу ---');
+  s.SetSphere(0.0, 0.0, 0.0, 10.0);
+  WriteLn('Точка/центр: ', s.GetPoint);
+  WriteLn('Об''єм:      ', FloatToStr(s.Volume));
+
+  s.Free;
+  ReadLn;
+
+end.

@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>1899.12.30 00:00:00.000.727,=D:\Університет\ООП\Lab_5\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.068,D:\Університет\ООП\Lab_5\Unit1.pas=D:\Університет\ООП\Lab_5\SICHU.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.633,=D:\Університет\ООП\Lab_5\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.981,D:\Університет\ООП\Lab_5\Unit1.pas=D:\Університет\ООП\Lab_5\SphereU.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.798,D:\Університет\ООП\Lab_5\Points.pas=D:\Університет\ООП\Lab_5\PointsU.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.301,D:\Університет\ООП\Lab_5\Unit1.pas=D:\Університет\ООП\Lab_5\Points.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.370,D:\Університет\ООП\Lab_5\SICH.pas=D:\Університет\ООП\Lab_5\Sichu.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.549,D:\Університет\ООП\Lab_5\Sichu.pas=D:\Університет\ООП\Lab_5\SICH.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.531,D:\Університет\ООП\Lab_5\Sichu.pas=D:\Університет\ООП\Lab_5\SichuU.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.868,C:\Університет\Алгоритмізація та програмування\Delphi Projects\Project1.dproj=D:\Університет\ООП\Lab_5\Project1.dproj</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.816,=D:\Університет\ООП\Lab_5\Unit1.pas</Transaction>
+  </Transactions>
+</BorlandProject>

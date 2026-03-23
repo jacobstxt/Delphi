@@ -1,0 +1,51 @@
+unit SichuU;
+
+interface
+
+Uses POINTS, SysUtils;
+Type Sich = class // клас Sich – круг
+Private
+// Оголошення полів класу Sich
+Center: Point;
+Rad: Real;
+Public
+// Оголошення методів класу Sich
+Constructor Creat (x, y, z, r: Real);
+Procedure SetSich (x, y, z, r: Real);
+Procedure SetRad (r: Real);
+Function GetPoint: String;
+Function GetRad: Real;
+end; // завершення розділу оголошення класу Sich
+
+implementation
+
+Procedure Sich.SetRad(r: Real);
+Begin
+if r >= 0 then Rad := r
+else Rad := 0;
+end;
+Constructor Sich.Creat (x, y, z, r: Real);
+Begin
+// Пам'ять виділено для поля Rad, але не виділено для вкладеного об'єкту
+// У даний момент значення Center = nil, а це означає, що потрібно створити об'єкт класу Point
+Center := Point.Creat(x, y, z);
+{ Записати замість попереднього рядка оператор Center.SetPoint (x, y, z) не можна, оскільки об'єкт Center класу
+Point ще не існує в пам'яті }
+SetRad(r);
+end;
+Procedure Sich.SetSich(x, y, z, r: Real); // реалізація методу SetSich
+Begin
+Center.SetPoint(x, y, z);
+SetRad(r);
+end;
+Function Sich.GetPoint:String; // реалізація методу GetPoint
+Begin
+Result := Center.GetPoint+ ', Rad = ' +FloatToStr(rad);
+end;
+Function Sich.GetRad: Real; // реалізація методу GetRad
+Begin
+Result := Rad;
+end;
+end.
+
+end.

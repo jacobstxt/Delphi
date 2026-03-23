@@ -1,0 +1,35 @@
+unit PointsU;
+
+interface
+
+Uses SysUtils; // для того, щоб використати функцію FloatToStr
+Type
+Point = class // клас Point – точка
+Private
+x, y, z: Real; // поля класу Point
+Public
+Constructor Creat (x1, y1, z1: Real); // конструктор класу Point
+Procedure SetPoint (x1, y1, z1: Real); // метод, що встановлює координати точки
+Function GetPoint: String; // метод, що повертає координати точки у вигляді рядка
+end;
+
+implementation
+
+Constructor Point.Creat (x1, y1, z1: Real);
+
+Begin
+SetPoint (x1, y1, z1);
+end;
+Procedure Point.SetPoint (x1, y1, z1: Real);
+Begin
+x := x1;
+y := y1;
+z := z1;
+end;
+Function Point.GetPoint: String;
+Begin
+GetPoint:='('+FloatToStr(x)+';'+FloatToStr(y)+'; '+FloatToStr(z) + ')';
+end;
+end.
+
+end.

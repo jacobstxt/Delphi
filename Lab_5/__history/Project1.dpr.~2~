@@ -1,0 +1,38 @@
+program Project1;
+
+{$APPTYPE CONSOLE}
+
+{$R *.res}
+
+uses
+  System.SysUtils,
+  Points in 'Points.pas',
+  SICHU in 'SICHU.pas',
+  SphereU in 'SphereU.pas';
+
+  Var P: Point; // оголошення об’єкта класу Point
+  S: Sphere; // оголошення об’єкта класу Sphere
+
+begin
+
+P := Point.Creat(1, 2, 3);
+WriteLn(' Coords Point = ',P.GetPoint);
+// Конструктором класу Sphere створюємо об’єкт S
+S := Sphere.Creat(1, 2, 5, 5);
+WriteLn(' Coords Center = ',S.GetPoint);
+WriteLn(' Volume Sphere = ',S.Volume:10:4);
+ReadLn; // затримання показу результату на екрані
+End.
+Var P: Point; // оголошення об’єкта класу Point
+S: Sphere; // оголошення об’єкта класу Sphere
+Begin
+// Конструктором класу Point створюємо об’єкт P
+P := Point.Creat(1, 2, 3);
+WriteLn(' Coords Point = ',P.GetPoint);
+// Конструктором класу Sphere створюємо об’єкт S
+S := Sphere.Creat(1, 2, 5, 5);
+WriteLn(' Coords Center = ',S.GetPoint);
+WriteLn(' Volume Sphere = ',S.Volume:10:4);
+ReadLn; // затримання показу результату на екрані
+
+end.
