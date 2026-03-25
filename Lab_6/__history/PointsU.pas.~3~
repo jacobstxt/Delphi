@@ -1,0 +1,31 @@
+unit PointsU;
+
+interface
+
+Uses SysUtils;
+Type Point = class
+Private
+x, y, z: Real;
+Public
+// Реалізація методів класу Point
+Constructor Create(x1, y1, z1: Real);
+Procedure SetPoint(x1, y1, z1: Real); // встановлення координати точки
+Function GetPoint: String; Virtual; // віртуальний метод повертає точку у вигляді рядка
+end;
+
+implementation
+
+Constructor Point.Create (x1, y1, z1: Real);
+Begin // пам’ять виділено і вказівники на підпрограми налаштовано.
+SetPoint(x1, y1, z1); // встановлення початкових значеннь
+end;
+Procedure Point.SetPoint (x1, y1, z1: Real);
+Begin
+x:=x1; y:=y1; z:=z1;
+end;
+Function Point.GetPoint: String;
+Begin
+GetPoint:='(' + FloatToStr(x) + ';' + FloatToStr(y) + ';'+FloatToStr(z) + ')';
+end;
+
+end.

@@ -1,0 +1,15 @@
+program Project1;
+
+{$APPTYPE CONSOLE}
+
+{$R *.res}
+
+uses
+  System.SysUtils,
+  Points in 'Points.pas',
+  Sichu in 'Sichu.pas',
+  SphereU in 'SphereU.pas';
+
+begin
+
+end.

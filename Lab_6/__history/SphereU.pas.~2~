@@ -1,0 +1,25 @@
+unit SphereU;
+
+interface
+Uses Sichu,SysUtils;
+
+Type Sphere = class (Sich) // Sphere нащадок класу Sich Ц кругу
+Public
+Constructor Create(x, y, z, r: Real);
+Function Volume: Real; // Volume Ц обТЇм сфери
+// ‘ункц≥њ друку ≥ заповненн€ пол≥в переход€ть в Sphere без зм≥н
+End;
+
+implementation
+
+Constructor Sphere.Create(x, y, z, r: Real);
+Begin
+Inherited Create(x, y, z ,r);
+end;
+
+Function Sphere.Volume: Real; // Volume Ц обТЇм сфери
+begin
+Result := (4 / 3) * Pi * Rad * Rad * Rad;
+end;
+
+end.

@@ -1,0 +1,102 @@
+unit BankCollectionU;
+interface
+uses SysUtils, BankU;
+
+const
+  MaxAccounts = 100;
+
+type
+  Bank = class
+  private
+    FName: string;
+    FAccounts: array[0..MaxAccounts - 1] of BankAccount;
+    FCount: Integer;
+  public
+    constructor Create(AName: string);
+    procedure AddAccount(Account: BankAccount);
+    procedure RemoveAccount(ANumber: string);
+    function FindAccount(ANumber: string): BankAccount;
+    procedure ShowAllAccounts;
+    procedure ShowTotalBalance;
+    property Name: string read FName;
+    property Count: Integer read FCount;
+  end;
+
+implementation
+
+constructor Bank.Create(AName: string);
+begin
+  FName := AName;
+  FCount := 0;
+end;
+
+
+procedure Bank.AddAccount(Account: BankAccount);
+begin
+  if FCount >= MaxAccounts then
+  begin
+    WriteLn('Помилка: банк переповнений!');
+    Exit;
+  end;
+  FAccounts[FCount] := Account;
+  Inc(FCount);
+  WriteLn('Рахунок ', Account.AccountNumber, ' додано до банку ', FName);
+end;
+
+procedure Bank.RemoveAccount(ANumber: string);
+var
+  i, j: Integer;
+begin
+  for i := 0 to FCount - 1 do
+  begin
+    if FAccounts[i].AccountNumber = ANumber then
+    begin
+      for j := i to FCount - 2 do
+        FAccounts[j] := FAccounts[j + 1];
+      Dec(FCount);
+      WriteLn('Рахунок ', ANumber, ' видалено з банку');
+      Exit;
+    end;
+  end;
+  WriteLn('Рахунок ', ANumber, ' не знайдено');
+end;
+
+
+function Bank.FindAccount(ANumber: string): BankAccount;
+var
+  i: Integer;
+begin
+  Result := nil;
+  for i := 0 to FCount - 1 do
+    if FAccounts[i].AccountNumber = ANumber then
+    begin
+      Result := FAccounts[i];
+      Exit;
+    end;
+end;
+
+procedure Bank.ShowAllAccounts;
+var
+  i: Integer;
+begin
+  WriteLn('');
+  WriteLn('=== БАНК: ', FName, ' ===');
+  WriteLn('Кількість рахунків: ', FCount);
+  WriteLn('');
+  for i := 0 to FCount - 1 do
+    FAccounts[i].ShowStatement;
+end;
+
+procedure Bank.ShowTotalBalance;
+var
+  i: Integer;
+  Total: Double;
+begin
+  Total := 0;
+  for i := 0 to FCount - 1 do
+    Total := Total + FAccounts[i].Balance;
+  WriteLn('');
+  WriteLn('Загальний баланс банку "', FName, '": ', Total:0:2, ' грн.');
+end;
+
+end.

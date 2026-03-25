@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>1899.12.30 00:00:00.000.680,C:\Університет\Алгоритмізація та програмування\Delphi Projects\Project1.dproj=D:\Університет\ООП\Lab_6\Project1.dproj</Transaction>
+    <Transaction>2026.03.24 18:23:12.993,=D:\Університет\ООП\Lab_6\Unit1.pas</Transaction>
+    <Transaction>2026.03.24 18:23:24.595,D:\Університет\ООП\Lab_6\Points.pas=D:\Університет\ООП\Lab_6\Unit1.pas</Transaction>
+    <Transaction>2026.03.24 18:24:14.500,=D:\Університет\ООП\Lab_6\Unit1.pas</Transaction>
+    <Transaction>2026.03.24 18:24:22.194,D:\Університет\ООП\Lab_6\Sichu.pas=D:\Університет\ООП\Lab_6\Unit1.pas</Transaction>
+    <Transaction>2026.03.24 18:25:16.463,=D:\Університет\ООП\Lab_6\Unit1.pas</Transaction>
+    <Transaction>2026.03.24 18:25:25.468,D:\Університет\ООП\Lab_6\Sphere.pas=D:\Університет\ООП\Lab_6\Unit1.pas</Transaction>
+    <Transaction>2026.03.24 18:28:27.535,D:\Університет\ООП\Lab_6\SphereU.pas=D:\Університет\ООП\Lab_6\Sphere.pas</Transaction>
+    <Transaction>2026.03.24 18:30:52.292,D:\Університет\ООП\Lab_6\PointsU.pas=D:\Університет\ООП\Lab_6\Points.pas</Transaction>
+    <Transaction>2026.03.24 18:30:57.586,D:\Університет\ООП\Lab_6\SichuU.pas=D:\Університет\ООП\Lab_6\Sichu.pas</Transaction>
+  </Transactions>
+</BorlandProject>
