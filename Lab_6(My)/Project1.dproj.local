@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <BorlandProject>
-  <Transactions>
-    <Transaction>2026.03.24 18:58:02.470,D:\Університет\ООП\Lab_6(My)\Project1.dproj=D:\Університет\ООП\Project1.dproj</Transaction>
-    <Transaction>2026.03.24 18:59:15.554,=D:\Університет\ООП\Lab_6(My)\BankCollectionU.pas</Transaction>
-    <Transaction>2026.03.24 18:59:15.605,=D:\Університет\ООП\Lab_6(My)\BankU.pas</Transaction>
-    <Transaction>2026.03.24 18:59:15.652,=D:\Університет\ООП\Lab_6(My)\SavingAccountU.pas</Transaction>
+	<Transactions>
+    <Transaction>1899.12.30 00:00:00.000.554,=D:\Університет\ООП\Lab_6(My)\BankCollectionU.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.652,=D:\Університет\ООП\Lab_6(My)\SavingAccountU.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.470,D:\Університет\ООП\Project1.dproj=D:\Університет\ООП\Lab_6(My)\Project1.dproj</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.605,=D:\Університет\ООП\Lab_6(My)\BankU.pas</Transaction>
   </Transactions>
 </BorlandProject>
