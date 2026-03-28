@@ -1,0 +1,137 @@
+﻿unit Unit1;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs;
+
+type
+  TForm1 = class(TForm)
+    procedure FormCreate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+
+  type
+  TEmployee = class
+  public
+    Name:     String;
+    Salary:   Integer;
+    constructor Create(Name: String; Salary: Integer);
+    function Info: String; virtual;
+  end;
+
+  TManager = class(TEmployee)
+  public
+    Department: String;
+    constructor Create(Name: String; Salary: Integer; Department: String);
+    function Info: String; override;
+  end;
+
+  TDeveloper = class(TEmployee)
+  public
+    Language: String;
+    constructor Create(Name: String; Salary: Integer; Language: String);
+    function Info: String; override;
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+
+{$R *.dfm}
+
+constructor TEmployee.Create(Name: String; Salary: Integer);
+begin
+  Self.Name   := Name;
+  Self.Salary := Salary;
+end;
+
+constructor TManager.Create(Name: String; Salary: Integer; Department: String);
+begin
+  inherited Create(Name, Salary);
+  Self.Department := Department;
+end;
+
+constructor TDeveloper.Create(Name: String; Salary: Integer; Language: String);
+begin
+  inherited Create(Name, Salary);
+  Self.Language := Language;
+end;
+
+
+
+function TEmployee.Info: String;
+begin
+  Result := Name + ', зарплата: ' + IntToStr(Salary) + ' грн';
+end;
+
+function TManager.Info: String;
+begin
+  Result := inherited Info + ', відділ: ' + Department;
+end;
+
+function TDeveloper.Info: String;
+begin
+  Result := inherited Info + ', мова: ' + Language;
+end;
+
+
+procedure TForm1.FormCreate(Sender: TObject);
+var
+  emp:  TEmployee;
+  mgr:  TManager;
+  dev:  TDeveloper;
+  msg:  String;
+begin
+  mgr := TManager.Create('Олег', 25000, 'Бухгалтерія');
+  dev := TDeveloper.Create('Марія', 30000, 'Pascal');
+
+
+  if mgr is TEmployee then
+    ShowMessage(mgr.Name + ' є працівником.' + #13#10 + mgr.Info);
+
+
+  if dev is TEmployee then
+    ShowMessage(dev.Name + ' є працівником.' + #13#10 + dev.Info);
+
+
+  emp := mgr;
+
+  if emp is TManager then
+    ShowMessage(emp.Name + ' є менеджером.')
+  else
+    ShowMessage(emp.Name + ' не є менеджером.');
+
+  // 4. emp вказує на TManager — тому TPear не підходить
+  if emp is TDeveloper then
+    ShowMessage(emp.Name + ' є розробником.')
+  else
+    ShowMessage(emp.Name + ' — це не розробник!');
+
+  // 5. Приведення типу через as — доступ до поля Department
+  emp := mgr;
+  if emp is TManager then
+  begin
+    msg := 'Відділ: ' + (emp as TManager).Department;
+    ShowMessage(msg);
+  end;
+
+  // 6. Те саме для розробника
+  emp := dev;
+  if emp is TDeveloper then
+  begin
+    msg := 'Мова програмування: ' + (emp as TDeveloper).Language;
+    ShowMessage(msg);
+  end;
+
+  mgr.Free;
+  dev.Free;
+end;
+
+end.

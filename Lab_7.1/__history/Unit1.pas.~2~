@@ -1,0 +1,67 @@
+unit Unit1;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs;
+
+type
+  TFruit = class // оголошуємо клас TFruit (фрукт)
+  Public
+  name: String;
+  Published
+  Constructor Create(name: String);
+  end; // завершення операторів оголошення класу TFruit
+  TApple = class(TFruit); // оголошуємо тип TApple (яблуко) нащадок TFruit
+  TPear = class(TFruit);
+
+  TForm1 = class(TForm)
+    procedure FormCreate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+
+{$R *.dfm}
+
+Constructor TFruit.Create(name: String);
+Begin
+Self.name := name;
+end;
+
+
+
+
+
+procedure TForm1.FormCreate(Sender: TObject);
+Var
+fruit: TFruit; // оголошення об’єкта класу TFruit
+apple: TApple; // оголошення об’єкта класу TApple
+pear: TPear; // оголошення об’єкта класу TPear
+begin
+  // Створюємо два різні об’єкти
+  apple := TApple.Create('Антонівка'); // об’єкт класу TApple
+  pear := TPear.Create('Бера'); // об’єкт класу TPear
+  // Обидва об’єкти породжені від нащадків класу TFruit і є фруктами
+  If apple is TFruit then
+  ShowMessage(apple.name +' - фрукта');
+  If pear is TFruit then
+
+  ShowMessage(pear.name +' - фрукта');
+  fruit := apple; // присвоюємо об’єкту fruit адресу об’єкту apple
+  If fruit is TApple then
+  ShowMessage(apple.name +' - яблуко');
+  // Але яблуко не є грушею
+  If fruit is TPear // if apple is TPear не компілюється
+  then ShowMessage(apple.name + ' - груша')
+  else ShowMessage(apple.name + ' - це не груша!');
+end;
+
+end.

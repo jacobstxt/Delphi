@@ -1,0 +1,130 @@
+﻿unit Unit1;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls;
+
+type
+  TForm1 = class(TForm)
+    LabelName: TLabel;
+    LabelAge: TLabel;
+    LabelEmail: TLabel;
+    EditName: TEdit;
+    EditAge: TEdit;
+    EditEmail: TEdit;
+    ButtonOk: TButton;
+    LabelStatus: TLabel;
+    procedure ButtonOkClick(Sender: TObject);
+    procedure EditNameChange(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+  private
+    function IsValidName(const S: String): Boolean;
+    function IsValidAge(const S: String): Boolean;
+    function IsValidEmail(const S: String): Boolean;
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+
+{$R *.dfm}
+
+
+function TForm1.IsValidName(const S: String): Boolean;
+begin
+  // Ім'я не порожнє і довше 1 символу
+  Result := Length(Trim(S)) > 1;
+end;
+
+function TForm1.IsValidAge(const S: String): Boolean;
+var
+  n: Integer;
+begin
+  // Вік — ціле число від 1 до 120
+  Result := TryStrToInt(S, n) and (n >= 1) and (n <= 120);
+end;
+
+function TForm1.IsValidEmail(const S: String): Boolean;
+begin
+  // Email містить @ і крапку після неї
+  Result := (Pos('@', S) > 1) and
+            (Pos('.', S) > Pos('@', S) + 1);
+end;
+
+
+procedure TForm1.ButtonOkClick(Sender: TObject);
+var
+  Errors: String;
+begin
+  Errors := '';
+
+  if not IsValidName(EditName.Text) then
+    Errors := Errors + '• Ім''я: введіть щонайменше 2 символи' + #13#10;
+
+  if not IsValidAge(EditAge.Text) then
+    Errors := Errors + '• Вік: введіть число від 1 до 120' + #13#10;
+
+  if not IsValidEmail(EditEmail.Text) then
+    Errors := Errors + '• Email: невірний формат' + #13#10;
+
+  if Errors = '' then
+  begin
+    LabelStatus.Font.Color := clGreen;
+    LabelStatus.Caption := '✓ Дані прийнято!';
+    ShowMessage('Дані успішно введено!' + #13#10 +
+                'Ім''я: '  + EditName.Text  + #13#10 +
+                'Вік: '    + EditAge.Text   + #13#10 +
+                'Email: '  + EditEmail.Text);
+  end
+  else
+  begin
+    LabelStatus.Font.Color := clRed;
+    LabelStatus.Caption := '✗ Є помилки!';
+    ShowMessage('Виправте помилки:' + #13#10 + Errors);
+  end;
+
+end;
+
+procedure TForm1.EditNameChange(Sender: TObject);
+begin
+
+// Sender вказує яке саме поле змінилось
+  if Sender = EditName then
+  begin
+    if IsValidName(EditName.Text) then
+      EditName.Color := clMoneyGreen   // зелений — ок
+    else
+      EditName.Color := $00AAAAFF;     // червонуватий — помилка
+  end
+
+  else if Sender = EditAge then
+  begin
+    if IsValidAge(EditAge.Text) then
+      EditAge.Color := clMoneyGreen
+    else
+      EditAge.Color := $00AAAAFF;
+  end
+
+  else if Sender = EditEmail then
+  begin
+    if IsValidEmail(EditEmail.Text) then
+      EditEmail.Color := clMoneyGreen
+    else
+      EditEmail.Color := $00AAAAFF;
+  end;
+
+end;
+
+procedure TForm1.FormCreate(Sender: TObject);
+begin
+LabelStatus.Caption := '';
+LabelStatus.Font.Color := clRed;
+Caption := 'Форма введення даних';
+end;
+
+end.

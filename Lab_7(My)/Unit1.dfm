@@ -1,0 +1,82 @@
+object Form1: TForm1
+  Left = 0
+  Top = 0
+  Caption = 'Form1'
+  ClientHeight = 441
+  ClientWidth = 624
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -27
+  Font.Name = 'Segoe UI'
+  Font.Style = []
+  OnCreate = FormCreate
+  TextHeight = 37
+  object LabelName: TLabel
+    Left = 64
+    Top = 144
+    Width = 46
+    Height = 37
+    Caption = #1030#1084#39#1103
+  end
+  object LabelAge: TLabel
+    Left = 64
+    Top = 192
+    Width = 35
+    Height = 37
+    Caption = #1042#1110#1082
+  end
+  object LabelEmail: TLabel
+    Left = 64
+    Top = 240
+    Width = 76
+    Height = 37
+    Caption = 'E-mail'
+  end
+  object LabelStatus: TLabel
+    Left = 384
+    Top = 144
+    Width = 135
+    Height = 37
+    Caption = 'LabelStatus'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -27
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentFont = False
+  end
+  object EditName: TEdit
+    Left = 168
+    Top = 141
+    Width = 121
+    Height = 45
+    TabOrder = 0
+    OnChange = EditNameChange
+  end
+  object EditAge: TEdit
+    Left = 168
+    Top = 189
+    Width = 121
+    Height = 45
+    TabOrder = 1
+    OnChange = EditNameChange
+  end
+  object EditEmail: TEdit
+    Left = 168
+    Top = 237
+    Width = 121
+    Height = 45
+    TabOrder = 2
+    OnChange = EditNameChange
+  end
+  object ButtonOk: TButton
+    Left = 168
+    Top = 304
+    Width = 121
+    Height = 25
+    Caption = #1047#1072#1088#1077#1108#1089#1090#1088#1091#1074#1072#1090#1080#1089#1103
+    TabOrder = 3
+    OnClick = ButtonOkClick
+  end
+end
