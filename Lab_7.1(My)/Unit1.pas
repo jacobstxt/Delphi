@@ -103,6 +103,7 @@ begin
 
   emp := mgr;
 
+
   if emp is TManager then
     ShowMessage(emp.Name + ' є менеджером.')
   else

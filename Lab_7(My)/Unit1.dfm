@@ -73,8 +73,8 @@ object Form1: TForm1
   object ButtonOk: TButton
     Left = 168
     Top = 304
-    Width = 121
-    Height = 25
+    Width = 249
+    Height = 73
     Caption = #1047#1072#1088#1077#1108#1089#1090#1088#1091#1074#1072#1090#1080#1089#1103
     TabOrder = 3
     OnClick = ButtonOkClick

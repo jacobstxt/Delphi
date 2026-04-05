@@ -64,7 +64,9 @@ begin
     Errors := Errors + '• Ім''я: введіть щонайменше 2 символи' + #13#10;
 
   if not IsValidAge(EditAge.Text) then
-    Errors := Errors + '• Вік: введіть число від 1 до 100' + #13#10;
+    Errors := Errors + '• Вік: введіть число від 1 до 100' +
+
+     #13#10;
 
   if not IsValidEmail(EditEmail.Text) then
     Errors := Errors + '• Email: невірний формат' + #13#10;
@@ -110,6 +112,8 @@ begin
     if IsValidEmail(EditEmail.Text) then
       EditEmail.Color := clMoneyGreen
     else
+
+
       EditEmail.Color := $00AAAAFF;
   end;
 
